@@ -1,0 +1,23 @@
+{
+  "name": "test/client",
+  "description": "API client prototype",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Steven Robinson",
+      "email": "steven.robinson@sykescottages.co.uk"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Client\\": "src/Client"
+    }
+  },
+  "require": {
+    "guzzle/guzzle": "v3.9.3",
+    "symfony/http-foundation": "3.4.x-dev",
+    "monolog/monolog": "2.0.x-dev",
+    "pimple/pimple": "3.2.x-dev"
+  }
+}
