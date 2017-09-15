@@ -41,7 +41,6 @@ class App extends Container
 
         $this['event.listener'] = function (Container $c) {
             return new Listener(
-                $c['event.dispatcher'],
                 $c['app.logger']
             );
         };

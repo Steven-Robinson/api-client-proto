@@ -2,17 +2,12 @@
 
 namespace Client;
 
-use Symfony\Component\EventDispatcher\EventDispatcher;
-
 class Listener
 {
-    protected $eventDispatcher;
-
     private $logger;
 
-    public function __construct(EventDispatcher $eventDispatcher, Logger $logger)
+    public function __construct(Logger $logger)
     {
-        $this->eventDispatcher = $eventDispatcher;
         $this->logger = $logger;
     }
 
