@@ -28,25 +28,25 @@ class App extends Container
 
     private function setupAppObjects()
     {
-        $this['event.dispatcher'] = function ($c) {
+        $this['event.dispatcher'] = function (Container $c) {
             return new EventDispatcher();
         };
 
-        $this['app.logger'] = function ($c) {
+        $this['app.logger'] = function (Container $c) {
             $monolog = new MonologLogger('API client logger');
             $monolog->pushHandler(new MonologStreamHandler($c['log-location'], MonologLogger::INFO));
 
             return new Logger($monolog);
         };
 
-        $this['event.listener'] = function ($c) {
+        $this['event.listener'] = function (Container $c) {
             return new Listener(
                 $c['event.dispatcher'],
                 $c['app.logger']
             );
         };
 
-        $this['event.manager'] = function ($c) {
+        $this['event.manager'] = function (Container $c) {
             return new EventManager(
                 $c['event.dispatcher'],
                 $c['event.listener']

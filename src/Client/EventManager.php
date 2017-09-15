@@ -3,7 +3,6 @@
 namespace Client;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Client\Listener;
 
 class EventManager
 {
