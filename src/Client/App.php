@@ -5,6 +5,7 @@ namespace Client;
 use Monolog\Handler\StreamHandler as MonologStreamHandler;
 use Monolog\Logger as MonologLogger;
 use Pimple\Container;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class App extends Container
 {
@@ -27,11 +28,29 @@ class App extends Container
 
     private function setupAppObjects()
     {
+        $this['event.dispatcher'] = function ($c) {
+            return new EventDispatcher();
+        };
+
         $this['app.logger'] = function ($c) {
             $monolog = new MonologLogger('API client logger');
-            $monolog->pushhandler(new MonologStreamHandler($c['log-location'], MonologLogger::INFO));
+            $monolog->pushHandler(new MonologStreamHandler($c['log-location'], MonologLogger::INFO));
 
             return new Logger($monolog);
+        };
+
+        $this['event.listener'] = function ($c) {
+            return new Listener(
+                $c['event.dispatcher'],
+                $c['app.logger']
+            );
+        };
+
+        $this['event.manager'] = function ($c) {
+            return new EventManager(
+                $c['event.dispatcher'],
+                $c['event.listener']
+            );
         };
     }
 }
