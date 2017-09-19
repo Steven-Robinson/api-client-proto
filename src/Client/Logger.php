@@ -2,13 +2,13 @@
 
 namespace Client;
 
-use Monolog\Logger as Log;
+use Psr\Log\LoggerInterface;
 
 class Logger
 {
     private $logger;
 
-    public function __construct(Log $logger)
+    public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
